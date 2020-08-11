@@ -1,7 +1,7 @@
 module App
 
 open System
-open Fable.Import.Browser
+open Browser
 open Fable.Core
 open Fable.Core.JsInterop
 
@@ -30,8 +30,8 @@ type Time =
     | Minute of int
     | Second of int
 
-open Fable.Helpers.React
-open Fable.Helpers.React.Props
+open Fable.React
+open Fable.React.Props
 
 let clockHand time color width length = 
     let clockPercentage = 
@@ -42,7 +42,7 @@ let clockHand time color width length =
     let angle = 2.0 * Math.PI * clockPercentage
     let handX = (50.0 + length * cos (angle - Math.PI / 2.0))
     let handY = (50.0 + length * sin (angle - Math.PI / 2.0))
-    line [ X1 (!! "50"); Y1 (!! "50"); X2 (!! (string handX)); Y2 (!! (string handY)); Stroke color; !! ("stroke-width", string width) ] []
+    line [ X1 (!! "50"); Y1 (!! "50"); X2 (!! (string handX)); Y2 (!! (string handY)); !! ("stroke", color); !! ("stroke-width", string width) ] []
 
 let handTop n color length fullRound = 
     let revolution = float n
@@ -68,12 +68,12 @@ let view (CurrentTime time) dispatch =
         handTop time.Second "#023963" 40.0 60.0
         // circle in the center
         circle 
-          [ Cx (!! "50"); Cy (!! "50"); R (!! "3"); !! ("fill", "#0B79CE") ; Stroke "#023963"; !! ("stroke-width", 1.0) ] 
+          [ Cx (!! "50"); Cy (!! "50"); R (!! "3"); !! ("fill", "#0B79CE") ; !! ("stroke","#023963"); !! ("stroke-width", 1.0) ] 
           []
       ]
 
 // App
 Program.mkProgram initialState update view
 |> Program.withSubscription subscription 
-|> Program.withReact "elmish-app"
+|> Program.withReactBatched "elmish-app"
 |> Program.run
