@@ -19,6 +19,8 @@ obj
 bin
 out
 paket-files
+.paket/
+.ionide/
 
 .vs
 
