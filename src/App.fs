@@ -42,7 +42,7 @@ let clockHand time color width length =
     let angle = 2.0 * Math.PI * clockPercentage
     let handX = (50.0 + length * cos (angle - Math.PI / 2.0))
     let handY = (50.0 + length * sin (angle - Math.PI / 2.0))
-    line [ X1 (!! "50"); Y1 (!! "50"); X2 (!! (string handX)); Y2 (!! (string handY)); !! ("stroke", color); !! ("stroke-width", string width) ] []
+    line [ X1 (!! "50"); Y1 (!! "50"); X2 (!! (string handX)); Y2 (!! (string handY)); !! ("stroke", color); !! ("strokeWidth", string width) ] []
 
 let handTop n color length fullRound = 
     let revolution = float n
@@ -68,7 +68,7 @@ let view (CurrentTime time) dispatch =
         handTop time.Second "#023963" 40.0 60.0
         // circle in the center
         circle 
-          [ Cx (!! "50"); Cy (!! "50"); R (!! "3"); !! ("fill", "#0B79CE") ; !! ("stroke","#023963"); !! ("stroke-width", 1.0) ] 
+          [ Cx (!! "50"); Cy (!! "50"); R (!! "3"); !! ("fill", "#0B79CE") ; !! ("stroke","#023963"); !! ("strokeWidth", 1.0) ] 
           []
       ]
 
